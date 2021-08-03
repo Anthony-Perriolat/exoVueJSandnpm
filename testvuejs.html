@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            box-sizing: border-box;
+        }
+
+        .red {
+            color: red;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="counter">
+        Counter: {{ counter }}
+    </div>
+    <div id="textWithInput">
+        <h1 :class="{ red : cssActive }"> {{ titleOne }}</h1>
+        <input type="text" v-model="titleOne">
+        <p>
+            {{ text }}
+        </p>
+        <h2 :class="{ red : cssActive }"> {{ titleTwo }} </h2>
+        <input type="button" value="Changement d'H2" v-on:click="changeValueOfTitleTwo">
+        <br>
+        <span>En quelle année la calculette numerique a été fabriqué en masse ? </span>
+        <br>
+        <input v-model="inputValue" type="text">
+        <div v-if="inputValue === '1961'"><img
+                src="data:image/jpeg;base64,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"
+                alt="">
+            <h1>Bravo !!!!</h1>
+        </div>
+        <br>
+        <input type="checkbox" id="checkbox" v-model="cssActive" />
+        <label for="checkbox">La valeur red est en état : {{ cssActive }}</label>
+        <input type="checkbox" id="checkbox1" v-model="hidePic" />
+        <label for="checkbox1">La valeur hide est en état : {{ hidePic }}</label>
+        <br>
+        <img :class="{ hide : hidePic }" src="https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1057506940?k=6&m=1057506940&s=612x612&w=0&h=C11yA-ESqeuCX63QkRpPyWmAMXJJvZw0niQluGnATlI=">
+
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const Counter = {
+            data() {
+                return {
+                    counter: 0
+                }
+            },
+            mounted() {
+                setInterval(() => {
+                    this.counter++
+                }, 1000)
+            }
+        }
+
+        const TextWithInput = {
+            data() {
+                return {
+                    text: "Une calculatrice ou calculette (terme souvent considéré comme péjoratif par les fabricants) est une machine conçue pour simplifier et fiabiliser des opérations de calcul. D'abord mécanique, puis électromécanique, la machine à calculer est devenue électronique dans les années 1960, avec l'introduction de la première machine à calculer électronique en 1961, suivie d'une miniaturisation accélérée des circuits intégrés. ",
+                    inputValue: "",
+                    titleOne: "L'histoire de la calculette",
+                    titleTwo: "Question",
+                    newH2: "Le titre de la question a changé",
+                    cssActive: false,
+                    hidePic: true,
+                }
+            },
+            methods: {
+                changeValueOfTitleTwo() {
+                    if (this.titleTwo != this.newH2) {
+                        [this.titleTwo, this.newH2] = [this.newH2, this.titleTwo];
+                    }
+                    else {
+                        [this.newH2, this.titleTwo] = [this.newH2, this.titleTwo];
+                    }
+                }
+            },
+            watch: {
+                inputValue(newValue, oldValue) {
+                    if (newValue === "1961")
+                        console.log(newValue);
+                    this.inputValue = newValue
+                }
+
+            }
+
+        }
+
+        Vue.createApp(TextWithInput).mount('#textWithInput')
+
+        Vue.createApp(Counter).mount('#counter')
+    // vue appel de vuejs
+    // mount liée id à l'objet
+
+    </script>
+
+</body>
+
+</html>
